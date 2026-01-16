@@ -17,6 +17,8 @@ SOURCES=(
     "src/invertColors.cpp"
     "src/brightness.cpp"
     "src/blurImage.cpp"        # uncomment when ready
+    "src/noiseGeneration.cpp"
+    "src/boxBlurImage.cpp"
     # "src/contrast.cpp"    # uncomment when ready
 )
 

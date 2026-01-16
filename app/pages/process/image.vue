@@ -177,7 +177,41 @@ const availableFunctions = [
     {
         name: "blurImage",
         description: "Uses Gaussian blur to blur the image",
-        params: [],
+        params: [
+            {
+                name: "amount",
+                type: "range",
+                min: 0,
+                max: 50,
+                default: 0,
+            },
+        ],
+    },
+    {
+        name: "boxBlurImage",
+        description: "Uses box blur blur to blur the image",
+        params: [
+            {
+                name: "amount",
+                type: "range",
+                min: 0,
+                max: 50,
+                default: 0,
+            },
+        ],
+    },
+    {
+        name: "noiseGeneration",
+        description: "Adds noise to the image",
+        params: [
+            {
+                name: "amount",
+                type: "range",
+                min: 0,
+                max: 200,
+                default: 0,
+            },
+        ],
     },
 ];
 
@@ -258,20 +292,20 @@ function processImage(img: HTMLImageElement) {
     const args =
         chosenFunction.value?.params.map((p) => paramValues.value[p.name]) ||
         [];
-    console.log("------------------");
-    console.log(selectedFunction.value);
     let result;
-    if (selectedFunction.value === "blurImage") {
+    if (
+        selectedFunction.value === "blurImage" ||
+        selectedFunction.value === "boxBlurImage"
+    ) {
         result = wasm[selectedFunction.value](
             input,
             canvas.width,
             canvas.height,
+            ...args,
         );
     } else {
         result = wasm[selectedFunction.value](input, ...args);
     }
-    console.log(result);
-    console.log("------------------");
 
     const output = new Uint8ClampedArray(result.size() * 4);
     for (let i = 0; i < result.size(); i++) {

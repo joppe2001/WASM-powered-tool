@@ -3,6 +3,8 @@
 #include "invertColors.hpp"
 #include "brightness.hpp"
 #include "blurImage.hpp"
+#include "noiseGeneration.hpp"
+#include "boxBlurImage.hpp"
 
 EMSCRIPTEN_BINDINGS(module) {
     emscripten::value_object<RGBA>("RGBA")
@@ -15,4 +17,6 @@ EMSCRIPTEN_BINDINGS(module) {
     emscripten::function("invertColors", &invertColors);
     emscripten::function("brightness", &brightness);
     emscripten::function("blurImage", &blurImage);
+    emscripten::function("noiseGeneration", &noiseGeneration);
+    emscripten::function("boxBlurImage", &boxBlurImage);
 }

@@ -4,6 +4,6 @@
 #include <vector>
 #include "greyscaleImage.hpp"
 
-std::vector<RGBA> blurImage(std::vector<RGBA> image, int width, int height);
+std::vector<RGBA> blurImage(std::vector<RGBA> image, int width, int height, int amount);
 
 #endif

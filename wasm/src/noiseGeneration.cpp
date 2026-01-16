@@ -1,21 +1,23 @@
 #include <vector>
 #include <cmath>
 #include <random>
+#include <algorithm>
 #include "greyscaleImage.hpp"
 
-std::vector<RGBA> noiseGeneration(std::vector<RGBA> image, int amount) {
-    std::vector<RGBA> outputImage(image.size());
+using namespace std;
 
-    // STEP 1: You need a way to generate random numbers
-    // Hint: look into <random> header, specifically a "distribution" and an "engine"
+vector<RGBA> noiseGeneration(vector<RGBA> image, int amount) {
+    vector<RGBA> outputImage(image.size());
 
-    // STEP 2: Loop through each pixel
+    random_device randomNumber;
+    for ( int i = 0; i < image.size(); i++) {
+        int noise = randomNumber() % (2 * amount + 1) - amount;
 
-        // STEP 3: Get a random value (positive or negative) based on "amount"
-
-        // STEP 4: Add that random value to the pixel's RGB channels
-
-        // STEP 5: Make sure values stay within 0-255
+        outputImage[i].r = std::clamp(image[i].r + noise, 0, 255);
+        outputImage[i].g = std::clamp(image[i].g + noise, 0, 255);
+        outputImage[i].b = std::clamp(image[i].b + noise, 0, 255);
+        outputImage[i].a = image[i].a;
+    }
 
     return outputImage;
 }
